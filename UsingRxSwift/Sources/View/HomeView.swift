@@ -35,12 +35,22 @@ class HomeView: UIView {
         return button
     }()
     
+    lazy var nameTextField: UITextField = {
+        let textField = UITextField()
+        textField.backgroundColor = .systemGray
+        textField.layer.borderColor = UIColor.white.cgColor
+        textField.layer.borderWidth = 1
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        return textField
+    }()
+    
 }
 
 extension HomeView: ViewCodeContract {
     func setupHierarchy() {
         addSubview(tableView)
         addSubview(onNextButton)
+        addSubview(nameTextField)
     }
     
     func setupConstraints() {
@@ -54,6 +64,11 @@ extension HomeView: ViewCodeContract {
             onNextButton.leftAnchor.constraint(equalTo: leftAnchor, constant: 10),
             onNextButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -10),
             onNextButton.heightAnchor.constraint(equalToConstant: 48),
+            
+            nameTextField.topAnchor.constraint(equalTo: onNextButton.bottomAnchor, constant: 20),
+            nameTextField.leftAnchor.constraint(equalTo: leftAnchor, constant: 10),
+            nameTextField.rightAnchor.constraint(equalTo: rightAnchor, constant: -10),
+            nameTextField.heightAnchor.constraint(equalToConstant: 48),
         ])
     }
     

@@ -19,7 +19,7 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         bindTableData()
-        bindDidTapButtons()
+        setupRx()
     }
     
     override func loadView() {
@@ -27,17 +27,22 @@ class HomeViewController: UIViewController {
         self.view = homeView
     }
     
-    func bindDidTapButtons() {
-//        homeView.onNextButton.rx.tap
-//            .subscribe { [ weak self ] _ in
-//                self?.viewModel.nextScreen()
-//            }
-//            .disposed(by: bag)
-        homeView.onNextButton.rx.tap
+    func setupRx() {
+        homeView.onNextButton
+            .rx
+            .tap
             .subscribe(onNext: { [ weak self ] _ in
                 self?.viewModel.nextScreen()
             })
             .disposed(by: bag)
+        
+        homeView.nameTextField
+            .rx
+            .controlEvent([.editingChanged])
+            .asObservable()
+            .subscribe({ [ weak self ] _ in
+                print(self?.homeView.nameTextField.text ?? "")
+            }).disposed(by: bag)
     }
     
     func bindTableData() {
