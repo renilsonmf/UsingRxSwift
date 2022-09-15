@@ -15,6 +15,7 @@ class HomeViewController: UIViewController {
     private let homeView = HomeView()
     private var viewModel = ProductViewModel()
     private var bag = DisposeBag()
+    let subject = PublishSubject<String>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,16 +51,6 @@ class HomeViewController: UIViewController {
                 }
                 
             }).disposed(by: bag)
-        
-//        label
-//           .rx
-//           .tapGesture()
-//           .when(.recognized) // This is important!
-//           .subscribe(onNext: { [weak self] _ in
-//               guard let self = self else { return }
-//               self.doWhatYouNeedToDo()
-//           })
-//           .disposed(by: disposeBag)
     }
     
     func bindTableData() {

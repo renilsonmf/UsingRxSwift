@@ -54,14 +54,6 @@ class HomeView: UIView {
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
-    
-    lazy var nameLabel: UILabel = {
-        let label = UILabel()
-        label.text = "olá"
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
 }
 
 // MARK: - Contract ViewCode
@@ -75,7 +67,6 @@ extension HomeView: ViewCodeContract {
         containerStack.addArrangedSubview(tableView)
         containerStack.addArrangedSubview(onNextButton)
         containerStack.addArrangedSubview(emailTextField)
-        containerStack.addArrangedSubview(nameLabel)
         
         NSLayoutConstraint.activate([
             
