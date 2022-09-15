@@ -10,6 +10,7 @@ import UIKit
 
 class HomeView: UIView {
 
+    // MARK: - Init
     override init(frame: CGRect = .zero) {
         super.init(frame: frame)
         setupView()
@@ -19,6 +20,7 @@ class HomeView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - View Code
     lazy var tableView: UITableView = {
         let table = UITableView()
         table.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
@@ -46,6 +48,7 @@ class HomeView: UIView {
     
 }
 
+// MARK: - Contract ViewCode
 extension HomeView: ViewCodeContract {
     func setupHierarchy() {
         addSubview(tableView)

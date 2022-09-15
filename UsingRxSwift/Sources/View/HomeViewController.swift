@@ -11,9 +11,9 @@ import RxCocoa
 
 class HomeViewController: UIViewController {
     
+    // MARK: - Private properties
     private let homeView = HomeView()
     private var viewModel = ProductViewModel()
-    
     private var bag = DisposeBag()
     
     override func viewDidLoad() {
@@ -27,6 +27,7 @@ class HomeViewController: UIViewController {
         self.view = homeView
     }
     
+    // MARK: - Setup UI RxSwift
     func setupRx() {
         homeView.onNextButton
             .rx
