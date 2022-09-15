@@ -37,19 +37,29 @@ class HomeViewController: UIViewController {
             })
             .disposed(by: bag)
         
-        homeView.nameTextField
+        homeView.emailTextField
             .rx
             .controlEvent([.editingChanged])
             .asObservable()
             .subscribe({ [ weak self ] _ in
-                guard let name = self?.homeView.nameTextField.text else { return }
+                guard let name = self?.homeView.emailTextField.text else { return }
                 if name.isValidEmail() {
-                    self?.homeView.nameTextField.layer.borderColor = UIColor.green.cgColor
+                    self?.homeView.emailTextField.layer.borderColor = UIColor.green.cgColor
                 } else {
-                    self?.homeView.nameTextField.layer.borderColor = UIColor.red.cgColor
+                    self?.homeView.emailTextField.layer.borderColor = UIColor.red.cgColor
                 }
                 
             }).disposed(by: bag)
+        
+//        label
+//           .rx
+//           .tapGesture()
+//           .when(.recognized) // This is important!
+//           .subscribe(onNext: { [weak self] _ in
+//               guard let self = self else { return }
+//               self.doWhatYouNeedToDo()
+//           })
+//           .disposed(by: disposeBag)
     }
     
     func bindTableData() {

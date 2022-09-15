@@ -21,6 +21,15 @@ class HomeView: UIView {
     }
     
     // MARK: - View Code
+    lazy var containerStack: UIStackView = {
+        let stack = UIStackView()
+        stack.distribution = .fill
+        stack.spacing = 20
+        stack.axis = .vertical
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
+    
     lazy var tableView: UITableView = {
         let table = UITableView()
         table.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
@@ -37,7 +46,7 @@ class HomeView: UIView {
         return button
     }()
     
-    lazy var nameTextField: UITextField = {
+    lazy var emailTextField: UITextField = {
         let textField = UITextField()
         textField.backgroundColor = .systemGray
         textField.layer.borderColor = UIColor.white.cgColor
@@ -46,32 +55,38 @@ class HomeView: UIView {
         return textField
     }()
     
+    lazy var nameLabel: UILabel = {
+        let label = UILabel()
+        label.text = "olá"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
 }
 
 // MARK: - Contract ViewCode
 extension HomeView: ViewCodeContract {
     func setupHierarchy() {
-        addSubview(tableView)
-        addSubview(onNextButton)
-        addSubview(nameTextField)
+        addSubview(containerStack)
     }
     
     func setupConstraints() {
+        
+        containerStack.addArrangedSubview(tableView)
+        containerStack.addArrangedSubview(onNextButton)
+        containerStack.addArrangedSubview(emailTextField)
+        containerStack.addArrangedSubview(nameLabel)
+        
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10),
-            tableView.leftAnchor.constraint(equalTo: leftAnchor, constant: 10),
-            tableView.rightAnchor.constraint(equalTo: rightAnchor, constant: -10),
+            
+            containerStack.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10),
+            containerStack.leftAnchor.constraint(equalTo: leftAnchor, constant: 10),
+            containerStack.rightAnchor.constraint(equalTo: rightAnchor, constant: -10),
+
             tableView.heightAnchor.constraint(equalToConstant: 250),
-            
-            onNextButton.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 20),
-            onNextButton.leftAnchor.constraint(equalTo: leftAnchor, constant: 10),
-            onNextButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -10),
             onNextButton.heightAnchor.constraint(equalToConstant: 48),
-            
-            nameTextField.topAnchor.constraint(equalTo: onNextButton.bottomAnchor, constant: 20),
-            nameTextField.leftAnchor.constraint(equalTo: leftAnchor, constant: 10),
-            nameTextField.rightAnchor.constraint(equalTo: rightAnchor, constant: -10),
-            nameTextField.heightAnchor.constraint(equalToConstant: 48),
+            emailTextField.heightAnchor.constraint(equalToConstant: 48),
+
         ])
     }
     
