@@ -41,7 +41,13 @@ class HomeViewController: UIViewController {
             .controlEvent([.editingChanged])
             .asObservable()
             .subscribe({ [ weak self ] _ in
-                print(self?.homeView.nameTextField.text ?? "")
+                guard let name = self?.homeView.nameTextField.text else { return }
+                if name.isValidEmail() {
+                    self?.homeView.nameTextField.layer.borderColor = UIColor.green.cgColor
+                } else {
+                    self?.homeView.nameTextField.layer.borderColor = UIColor.red.cgColor
+                }
+                
             }).disposed(by: bag)
     }
     
